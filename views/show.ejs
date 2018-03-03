@@ -1,0 +1,24 @@
+<% include ./partials/header %>
+    <div class="ui main text container segment">
+        <div class="ui huge header">
+            <%= classroom.title %>
+        </div>
+        <div class "ui top attached">
+            <div class="item">
+                <div class="content">
+                    <span><%=classroom.created.toDateString() %></span>
+                </div>
+                <div class="description">
+                    <p>
+                        <%- classroom.body %>
+                    </p>
+                </div>
+                <a class = "ui orange basic button" href="/academypgh5/<%= classroom._id %>/edit">Edit</a>
+                <form id= "delete" action="/academypgh5/<%= classroom._id %>?_method=DELETE" method="POST">
+                    <button class="ui pink basic button">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <% include ./partials/footer %>

@@ -1,0 +1,60 @@
+<% include ./partials/header %>
+    <h1>index page</h1>
+    <% Date.prototype.niceDate = function() { %>
+    <% var mm = this.getMonth();  %>
+    <% var dd = " "+this.getDate() + ", ";%>
+    <% var month = new Array(12);%>
+    <%month[0] = "January";%>
+    <%month[1] = "February";%>
+    <%month[2] = "March";%>
+    <%month[3] = "April";%>
+    <%month[4] = "May";%>
+    <%month[5] = "June";%>
+    <%month[6] = "July";%>
+    <%month[7] = "August";%>
+    <%month[8] = "September";%>
+    <%month[9] = "October";%>
+    <%month[10] = "November";%>
+    <%month[11] = "December";%>
+
+    <%var weekday = new Array(7);%>
+    <%weekday[0] = "Sunday ";%>
+    <%weekday[1] = "Monday ";%>
+    <%weekday[2] = "Tuesday ";%>
+    <%weekday[3] = "Wednesday ";%>
+    <%weekday[4] = "Thursday ";%>
+    <%weekday[5] = "Friday ";%>
+    <%weekday[6] = "Saturday ";%>
+    <%return [weekday[date.getDay()],month[mm], dd, this.getFullYear()].join('')%>
+    <% }; %>
+    <%var date = new Date();%>
+    <%var veryNiceDate = date.niceDate();%>
+
+    <h1>Here are your random groups for <%= veryNiceDate%></h1>
+    <br><br>
+    
+
+        <div>
+            <h2>
+                <%=classroom[0].title%>
+            </h2>
+            <span><%= classroom[0].created.toDateString() %></span>
+            <span><%= classroom[0].created%></span>
+            <%=classroom[0]._id%>
+
+            <% var junk =new Date(); %>
+            <%= console.log ("here is today: "+junk.toDateString()); %>
+            <%= console.log ("here is file : "+classroom[0].created.toDateString()); %>
+            <% var file1 = classroom[0].created.toDateString(); %>
+            <% var file2 = junk.toDateString(); %>
+
+            <% if (file1 == file2){console.log('they are!');}%>
+            <p>
+                <%= classroom[0].body %>
+            </p>
+            <% classroom[0].updatedTime = file2; %>
+            <%console.log('chick this out '+classroom[0].updatedTime);%>
+        </div>
+
+
+            <% include ./partials/footer %>
