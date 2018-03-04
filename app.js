@@ -5,7 +5,7 @@ var express = require('express'),
     methodOverride = require("method-override");
 
 //mongoose.connect('mongodb://localhost/random_groups1');
-mongoose.connect('mongodb://oldmanneill:academy5pgh@ds255258.mlab.com:55258/random_groups');
+mongoose.connect('mongodb://oldman:hellsyeah@ds255258.mlab.com:55258/random_groups');
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
