@@ -4,8 +4,8 @@ var express = require('express'),
     mongoose = require('mongoose'),
     methodOverride = require("method-override");
 
-mongoose.connect('mongodb://localhost/random_groups');
-//mongoose.connect('mongodb://oldmanneill:pgh5@ds155278.mlab.com:55278/classpgh');
+//mongoose.connect('mongodb://localhost/random_groups');
+mongoose.connect('mongodb://oldmanneill:pgh5@ds155278.mlab.com:55278/classpgh');
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -16,25 +16,6 @@ var appSchema = new mongoose.Schema({
     classList: [],
     updatedTime: String
 });
-var Groups = mongoose.model('Groups', appSchema);
-var randoList = ["Coral", "Emily", "John", "Emma", "Michael",
-    "Greg", "Jennifer", "Zach", "Sarah", "Megan",
-    "Aliia", "Ohad", "Brandon", "Sum", "Lenar"
-];
-
-/*mongoose.connect('mongodb://localhost/random_groups');
-app.set('view engine', 'ejs');
-app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(methodOverride("_method"));
-
-var appSchema = new mongoose.Schema({
-    title: String,
-    body: String,
-    classList: [],
-    created: { type: Date, default: Date.now },
-    updatedTime: String
-});*/
 var Groups = mongoose.model('Groups', appSchema);
 var randoList = ["Coral", "Emily", "John", "Emma", "Michael",
     "Greg", "Jennifer", "Zach", "Sarah", "Megan",
