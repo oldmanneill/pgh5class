@@ -4,7 +4,8 @@ var express = require('express'),
     mongoose = require('mongoose'),
     methodOverride = require("method-override");
 
-mongoose.connect('mongodb://oldmanneill:pgh5@ds155278.mlab.com:55278/classpgh');
+mongoose.connect('mongodb://localhost/random_groups');
+//mongoose.connect('mongodb://oldmanneill:pgh5@ds155278.mlab.com:55278/classpgh');
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,6 +21,41 @@ var randoList = ["Coral", "Emily", "John", "Emma", "Michael",
     "Greg", "Jennifer", "Zach", "Sarah", "Megan",
     "Aliia", "Ohad", "Brandon", "Sum", "Lenar"
 ];
+
+/*mongoose.connect('mongodb://localhost/random_groups');
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
+
+var appSchema = new mongoose.Schema({
+    title: String,
+    body: String,
+    classList: [],
+    created: { type: Date, default: Date.now },
+    updatedTime: String
+});*/
+var Groups = mongoose.model('Groups', appSchema);
+var randoList = ["Coral", "Emily", "John", "Emma", "Michael",
+    "Greg", "Jennifer", "Zach", "Sarah", "Megan",
+    "Aliia", "Ohad", "Brandon", "Sum", "Lenar"
+];
+
+//new route
+app.get('/academypgh5/new', function(req, res) {
+    res.render('new');
+});
+//create route
+app.post("/academypgh5", function(req, res) {
+    Groups.create(req.body.classroom, function(err, newGroups) {
+        if (err) {
+            res.render("new");
+        }
+        else {
+            res.redirect("/academypgh5");
+        }
+    });
+});
 
 var checkDate = new Date().toDateString();                          //finds the date right now.
 Groups.count({ updatedTime: checkDate }, function(err, counting) { //checks to see if the last date is the same as today's
@@ -70,6 +106,7 @@ function restfulRoutes() {
         });
     });
 }
+
 app.listen(process.env.PORT, process.env.IP, function() {
     console.log('server is running');
 });

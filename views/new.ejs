@@ -1,0 +1,20 @@
+<% include ./partials/header %>
+    <div class='ui main text container segment'>
+        <div class="ui huge header">new roster</div>
+        <form class="ui form" action="/academypgh5" method="POST">
+            <div class="field">
+                <label>Title</label>
+                <input type="text" name="classroom[title]" placeholder="title">
+            </div>
+            <div class="field">
+                <label>Class list</label>
+                <textarea name="classroom[classList]" placeholder="class list goes here"></textarea>
+            </div>
+            <div class="field">
+                <label>date</label>
+                <textarea name="classroom[updatedTime]" placeholder="time"></textarea>
+            </div>
+            <input class="ui violet basic button" type="submit">
+        </form>
+    </div>
+    <% include ./partials/footer %>
