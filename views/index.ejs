@@ -1,5 +1,4 @@
 <% include ./partials/header %>
-    <h1>index page</h1>
     <% Date.prototype.niceDate = function() { %>
     <% var mm = this.getMonth();  %>
     <% var dd = " "+this.getDate() + ", ";%>
@@ -30,31 +29,41 @@
     <%var date = new Date();%>
     <%var veryNiceDate = date.niceDate();%>
 
-    <h1>Here are your random groups for <%= veryNiceDate%></h1>
-    <br><br>
+    <img class = 'ui centered image' src = "http://academypgh.com/wp-content/uploads/2018/02/Logo-75-Academy-Pittsburgh.png" alt = "logo">
     
+    <div class='ui text container segment'>
 
+    <h1>Here are the <%=classroom[0].title%> random groups for <%= veryNiceDate+":"%></h1>
+    <br>
         <div>
-            <h2>
-                <%=classroom[0].title%>
-            </h2>
-            <span><%= classroom[0].created.toDateString() %></span>
-            <span><%= classroom[0].created%></span>
-            <%=classroom[0]._id%>
-
-            <% var junk =new Date(); %>
-            <%= console.log ("here is today: "+junk.toDateString()); %>
-            <%= console.log ("here is file : "+classroom[0].created.toDateString()); %>
-            <% var file1 = classroom[0].created.toDateString(); %>
-            <% var file2 = junk.toDateString(); %>
-
-            <% if (file1 == file2){console.log('they are!');}%>
-            <p>
-                <%= classroom[0].body %>
-            </p>
-            <% classroom[0].updatedTime = file2; %>
-            <%console.log('chick this out '+classroom[0].updatedTime);%>
+            <h1>
+                Group 1:
+                <%=classroom[0].classList[0]+", "%>
+                <%=classroom[0].classList[1]+", "%>
+                <%=classroom[0].classList[2]+", & "%>
+                <%=classroom[0].classList[3]%>
+            </h1>
+            <h1>
+                Group 2:
+                <%=classroom[0].classList[4]+", "%>
+                <%=classroom[0].classList[5]+", "%>
+                <%=classroom[0].classList[6]+", & "%>
+                <%=classroom[0].classList[7]%>
+            </h1>
+            <h1>
+                Group 3:
+                <%=classroom[0].classList[8]+", "%>
+                <%=classroom[0].classList[9]+", "%>
+                <%=classroom[0].classList[10]+", & "%>
+                <%=classroom[0].classList[11]%>
+            </h1>
+            <h1>
+                Group 4:
+                <%=classroom[0].classList[12]+", "%>
+                <%=classroom[0].classList[13]+", & "%>
+                <%=classroom[0].classList[14]%>
+            </h1>
         </div>
-
+        </div>
 
             <% include ./partials/footer %>

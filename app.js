@@ -13,111 +13,65 @@ app.use(methodOverride("_method"));
 var appSchema = new mongoose.Schema({
     title: String,
     body: String,
+    classList: [],
     created: { type: Date, default: Date.now },
     updatedTime: String
 });
 var Groups = mongoose.model('Groups', appSchema);
+var randoList = ["Coral", "Emily", "John", "Emma", "Michael",
+    "Greg", "Jennifer", "Zach", "Sarah", "Megan",
+    "Aliia", "Ohad", "Brandon", "Sum", "Lenar"
+];
 
-var checkDate = new Date().toDateString();
-console.log('check '+ checkDate);
-Groups.count({updatedTime : checkDate}, function(err, counting){//checks to see if the last date is the same as today's
-    if (err){                                                   //date. If it is, then show the index. Otherwise
-        console.log('error');                                   //update the database date and randomize the classlist, and
-    }else{                                                      //load up the index.
-    console.log('Count is ' + counting);
+var checkDate = new Date().toDateString();                          //finds the date right now.
+Groups.count({ updatedTime: checkDate }, function(err, counting) { //checks to see if the last date is the same as today's
+    if (err) {                                                      //date. If it is, then show the index. Otherwise
+        console.log('error');                                       //update the database date and randomize the classlist, and
+    }
+    else {                                                          //load up the index.
+        if (!counting) {
+
+            randoList.sort(function(a, b) {
+                return 0.5 - Math.random();
+            });
+            var conditions = { title: "Academy Pgh5" },
+                update = { classList: randoList, updatedTime: checkDate },
+                options = { multi: true };
+            Groups.update(conditions, update, options, callback);
+        }
+        else{
+            restfulRoutes();
+        }
     }
 });
 
-/*var conditions = { title: "Academy Pgh5" },
-    update = { updatedTime: checkDate },
-    options = { multi: true };
-
-Groups.update(conditions, update, options, callback);
 
 function callback(err, numAffected) {
-    if (err) {}
-    else {};
+    if (err) {
+        console.log('error in db check');
+    }
+    else {
+        restfulRoutes();
+    }
 }
-*/
 
-//restful routes
-app.get('/', function(req, res) {
-    res.redirect('/academypgh5');
-});
-app.get('/academypgh5', function(req, res) {
-    
-    Groups.find({}, function(err, classroom) {
-        if (err) {
-            console.log('error');
+function restfulRoutes() {
+    app.get('/', function(req, res) {
+        res.redirect('/academypgh5');
+    });
+    app.get('/academypgh5', function(req, res) {
 
-        }
-        else {
-            res.render('index', { classroom: classroom });
-        }
-    });
-});
-//new route
-app.get('/academypgh5/new', function(req, res) {
-    res.render('new');
-});
-//create route
-app.post("/academypgh5", function(req, res) {
-    Groups.create(req.body.classroom, function(err, newGroups) {
-        if (err) {
-            res.render("new");
-        }
-        else {
-            res.redirect("/academypgh5");
-        }
+        Groups.find({}, function(err, classroom) {
+            if (err) {
+                console.log('error');
 
+            }
+            else {
+                res.render('index', { classroom: classroom });
+            }
+        });
     });
-});
-//show route
-app.get("/academypgh5/:id", function(req, res) {
-    Groups.findById(req.params.id, function(err, foundGroups) {
-        if (err) {
-            res.redirect("/academypgh5");
-        }
-        else {
-            res.render("show", { classroom: foundGroups });
-        }
-    });
-
-});
-//edit route
-app.get("/academypgh5/:id/edit", function(req, res) {
-    Groups.findById(req.params.id, function(err, foundGroups) {
-        if (err) {
-            res.redirect("/academypgh5");
-        }
-        else {
-            res.render("edit", { classroom: foundGroups });
-        }
-    });
-});
-//update route
-app.put("/academypgh5/:id", function(req, res) {
-    Groups.findByIdAndUpdate(req.params.id, req.body.classroom, function(err, updatedGroups) {
-        if (err) {
-            res.redirect("/academypgh5");
-        }
-        else {
-            res.redirect('/academypgh5/' + req.params.id);
-        }
-    });
-});
-
-//delete route
-app.delete('/academypgh5/:id', function(req, res) {
-    Groups.findByIdAndRemove(req.params.id, function(err) {
-        if (err) {
-            res.redirect("/academypgh5");
-        }
-        else {
-            res.redirect("/academypgh5");
-        }
-    });
-});
+}
 app.listen(process.env.PORT, process.env.IP, function() {
     console.log('server is running');
 });
