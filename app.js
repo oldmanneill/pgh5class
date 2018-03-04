@@ -26,7 +26,7 @@ var randoList = ["Coral", "Emily", "John", "Emma", "Michael",
 app.get('/academypgh5/new', function(req, res) {
     res.render('new');
 });
-/*//create route
+//create route
 app.post("/academypgh5", function(req, res) {
     Groups.create(req.body.classroom, function(err, newGroups) {
         if (err) {
@@ -87,8 +87,7 @@ function restfulRoutes() {
         });
     });
 }
-*/
-app.listen(process.env.PORT || 3000, function(){
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
-});
 
+app.listen(process.env.PORT, process.env.IP, function() {
+    console.log('server is running');
+});
