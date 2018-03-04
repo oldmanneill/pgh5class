@@ -15,7 +15,7 @@ var appSchema = new mongoose.Schema({
     title: String,
     classList: [],
     updatedTime: String
-});
+}); 
 var Groups = mongoose.model('Groups', appSchema);
 var randoList = ["Coral", "Emily", "John", "Emma", "Michael",
     "Greg", "Jennifer", "Zach", "Sarah", "Megan",
