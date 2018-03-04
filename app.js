@@ -12,9 +12,7 @@ app.use(methodOverride("_method"));
 
 var appSchema = new mongoose.Schema({
     title: String,
-    body: String,
     classList: [],
-    created: { type: Date, default: Date.now },
     updatedTime: String
 });
 var Groups = mongoose.model('Groups', appSchema);
